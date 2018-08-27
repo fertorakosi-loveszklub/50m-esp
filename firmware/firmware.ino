@@ -22,7 +22,7 @@ static const char WIFI_PASSWORD[] = "fertorakos";
 WiFiServer server(1993);
 WiFiClient client;
 
-unsigned long SIGNAL_DURATION = 3000;
+unsigned long SIGNAL_DURATION = 500;
 
 unsigned long DISABLE_1 = 0;
 unsigned long DISABLE_2 = 0;
