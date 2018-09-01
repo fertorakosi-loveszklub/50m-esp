@@ -22,13 +22,23 @@ static const char WIFI_PASSWORD[] = "fertorakos";
 WiFiServer server(1993);
 WiFiClient client;
 
+// Ouput signal duration in ms
 unsigned long SIGNAL_DURATION = 500;
+
+// Duration of timeout after each rotation in ms
+unsigned long TIMEOUT_DURATION = 7000;
 
 unsigned long DISABLE_1 = 0;
 unsigned long DISABLE_2 = 0;
 unsigned long DISABLE_3 = 0;
 unsigned long DISABLE_4 = 0;
 unsigned long DISABLE_5 = 0;
+
+unsigned long TIMEOUT_1 = 0;
+unsigned long TIMEOUT_2 = 0;
+unsigned long TIMEOUT_3 = 0;
+unsigned long TIMEOUT_4 = 0;
+unsigned long TIMEOUT_5 = 0;
 
 void setup() {
   Serial.begin(57600);
@@ -94,32 +104,37 @@ void loop() {
     Serial.println(line);
     line.replace("\r", "");
 
-    if (line == "rotate1") {
+    if (line == "rotate1" && TIMEOUT_1 < now) {
       DISABLE_1 = now + SIGNAL_DURATION;
+      TIMEOUT_1 = now + TIMEOUT_DURATION;
       digitalWrite(OUT1, HIGH);
       Serial.println("OUT: 1");
     }
 
-    if (line == "rotate2") {
+    if (line == "rotate2" && TIMEOUT_2 < now) {
       DISABLE_2 = now + SIGNAL_DURATION;
+      TIMEOUT_2 = now + TIMEOUT_DURATION;
       digitalWrite(OUT2, HIGH);
       Serial.println("OUT: 2");
     }
 
-    if (line == "rotate3") {
+    if (line == "rotate3" && TIMEOUT_3 < now) {
       DISABLE_3 = now + SIGNAL_DURATION;
+      TIMEOUT_3 = now + TIMEOUT_DURATION;
       digitalWrite(OUT3, HIGH);
       Serial.println("OUT: 3");
     }
 
-    if (line == "rotate4") {
+    if (line == "rotate4" && TIMEOUT_4 < now) {
       DISABLE_4 = now + SIGNAL_DURATION;
+      TIMEOUT_4 = now + TIMEOUT_DURATION;
       digitalWrite(OUT4, HIGH);
       Serial.println("OUT: 4");
     }
 
-    if (line == "rotate5") {
+    if (line == "rotate5" && TIMEOUT_5 < now) {
       DISABLE_5 = now + SIGNAL_DURATION;
+      TIMEOUT_5 = now + TIMEOUT_DURATION;
       digitalWrite(OUT5, HIGH);
       Serial.println("OUT: 5");
     }
